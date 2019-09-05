@@ -1,19 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import MainScreen from './screens/MainScreen';
+import store from './store';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>รักหมูนะคะ รักมาก ๆ นะคะ หมูน้อย</Text>
-    </View>
-  );
+export default class App extends React.Component {
+  render() {
+    const AppNavigator = createStackNavigator({
+      Main: { screen: MainScreen }
+    });
+    const AppContainer = createAppContainer(AppNavigator);
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ 
